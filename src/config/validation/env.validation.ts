@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsOptional,
+  IsPositive,
   IsString,
   validateSync,
 } from 'class-validator';
@@ -23,6 +24,10 @@ export class EnvironmentVariables {
 
   @IsString()
   @IsNotEmpty()
+  AWS_BUCKET_NAME: string;
+
+  @IsString()
+  @IsNotEmpty()
   NODE_ENV: string;
 
   @IsString()
@@ -31,7 +36,8 @@ export class EnvironmentVariables {
 
   @IsOptional()
   @IsNumber()
-  PORT?: string;
+  @IsPositive()
+  PORT?: number;
 
   static validate(
     config: Record<string, unknown> = process.env,
